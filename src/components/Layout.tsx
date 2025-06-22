@@ -1,11 +1,13 @@
 import { Box, Center } from "@chakra-ui/react";
+import { BackButton } from "./BackButton";
 
 interface LayoutProps {
   children: React.ReactNode;
   margin?: number;
+  onGoBack?: () => void;
 }
 
-export const Layout = ({ children, margin = 8 }: LayoutProps) => {
+export const Layout = ({ children, margin = 8, onGoBack }: LayoutProps) => {
   return (
     <Box
       minH="100dvh"
@@ -18,6 +20,7 @@ export const Layout = ({ children, margin = 8 }: LayoutProps) => {
       //   transform: "scale(1.1)",
       // }}
     >
+      {onGoBack && <BackButton onClick={onGoBack} />}
       <Center h="100vh">
         <Box m={margin} minW={"200px"} maxW={"500px"}>
           {children}

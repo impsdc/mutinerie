@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { Layout } from "../component/layout";
-import { Button } from "../component/button";
+import { Layout } from "../components/Layout";
+import { Button } from "../components/Button";
 
 type Props = {
   onChangeStep: (step: number) => void;

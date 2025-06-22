@@ -11,7 +11,9 @@ const roleDescriptions = {
 
 export const RoleDescriptionScreen = () => {
   const { open, onOpen, onClose } = useDisclosure();
-  const [selectedRole, setSelectedRole] = useState<keyof typeof roleDescriptions | undefined>(undefined);
+  const [selectedRole, setSelectedRole] = useState<
+    keyof typeof roleDescriptions | undefined
+  >(undefined);
 
   const handleRoleClick = (role: keyof typeof roleDescriptions) => {
     setSelectedRole(role);
@@ -64,7 +66,9 @@ export const RoleDescriptionScreen = () => {
                 <Text fontSize="2xl" mb={4}>
                   {selectedRole}
                 </Text>
-                <Text>{selectedRole ? roleDescriptions[selectedRole] : ""}</Text>
+                <Text>
+                  {selectedRole ? roleDescriptions[selectedRole] : ""}
+                </Text>
               </Box>
             </Box>
           )}

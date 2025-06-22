@@ -1,7 +1,6 @@
 import { HomeScreen } from "./screens/HomeScreen";
 import { CaptainSelectionScreen } from "./screens/CaptainSelectionScreen";
 import { RoleAssignmentScreen } from "./screens/RoleAssignmentScreen";
-import { RoleDescriptionScreen } from "./screens/RoleDescriptionScreen";
 import { ChakraProvider } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { system } from "./theme";
@@ -37,8 +36,8 @@ const App = () => {
         return <CaptainSelectionScreen onChangeStep={handleChangeStep} />;
       case 3:
         return <RoleAssignmentScreen onChangeStep={handleChangeStep} />;
-      case 4:
-        return <RoleDescriptionScreen />;
+      // case 4:
+      // return <RoleDescriptionScreen />;
       default:
         return <HomeScreen onChangeStep={handleChangeStep} />;
     }

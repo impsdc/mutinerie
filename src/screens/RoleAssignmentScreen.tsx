@@ -1,32 +1,11 @@
-import { Text, Grid, GridItem, Flex, Image, Box } from "@chakra-ui/react";
-import { Layout } from "../component/layout";
-import { Button } from "../component/button";
+import { Text, Grid, GridItem, Flex } from "@chakra-ui/react";
+import { Layout } from "../components/Layout";
+import { Button } from "../components/Button";
 import { AnimatePresence, motion } from "framer-motion";
-import { ModalWrapper, ModalOverlay, ModalContent } from "../styles/card.css";
+import { ModalOverlay, ModalWrapper } from "../styles/card.css";
 import { useState } from "react";
-
-const roles = [
-  {
-    name: "Vigie",
-    description: "Le vigie est responsable de la surveillance du navire.",
-    image: "https://placehold.co/600x400",
-  },
-  {
-    name: "Mousse",
-    description: "Le vigie est responsable de la surveillance du navire.",
-    image: "https://placehold.co/600x400",
-  },
-  {
-    name: "Timonier",
-    description: "Le vigie est responsable de la surveillance du navire.",
-    image: "https://placehold.co/600x400",
-  },
-  {
-    name: "Matelot",
-    description: "Le vigie est responsable de la surveillance du navire.",
-    image: "https://placehold.co/600x400",
-  },
-] as const;
+import { roles } from "../utils/roles.config";
+import { Card } from "../components/Card";
 
 type Props = {
   onChangeStep: (step: number) => void;
@@ -38,7 +17,12 @@ export const RoleAssignmentScreen = ({ onChangeStep }: Props) => {
   >(undefined);
 
   const handleNext = () => {
+    return;
     onChangeStep(4);
+  };
+
+  const handleBack = () => {
+    onChangeStep(2);
   };
 
   const handleRoleClick = (role: (typeof roles)[number]) => () => {
@@ -47,15 +31,15 @@ export const RoleAssignmentScreen = ({ onChangeStep }: Props) => {
 
   return (
     <>
-      <Layout>
+      <Layout onGoBack={handleBack}>
         <Flex
           justifyContent="center"
           alignItems="center"
           flexDirection="column"
         >
           <Text fontSize="2xl" mb={8} textAlign="center" color={"white"}>
-            Bravo à toi capitaine ! Attribue maintenant les rôles à tes matelots
-            !
+            Bravo à toi capitaine !<br /> Attribue maintenant les rôles à tes
+            matelots !
           </Text>
           <Grid templateColumns="repeat(2, 1fr)" gap={8} mb={8}>
             {roles.map((role) => (
@@ -71,7 +55,7 @@ export const RoleAssignmentScreen = ({ onChangeStep }: Props) => {
               </GridItem>
             ))}
           </Grid>
-          <Button type="primary" onClick={handleNext} content="Continuer" />
+          <Button type="primary" onClick={handleNext} content="Partir en mer" />
         </Flex>
       </Layout>
       <AnimatePresence initial={false}>
@@ -84,20 +68,10 @@ export const RoleAssignmentScreen = ({ onChangeStep }: Props) => {
               key="modal"
               style={ModalWrapper}
             >
-              <div style={ModalContent}>
-                <Image src={selectedRole.image} />
-                <Text fontSize="xl" fontWeight="bold" mb={4}>
-                  {selectedRole.name}
-                </Text>
-                <Box w={1}>
-                  <Text>{selectedRole.description}</Text>
-                  <Button
-                    type="primary"
-                    onClick={() => setSelectedRole(undefined)}
-                    content={"Fermer"}
-                  />
-                </Box>
-              </div>
+              <Card
+                onClose={() => setSelectedRole(undefined)}
+                role={selectedRole}
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
